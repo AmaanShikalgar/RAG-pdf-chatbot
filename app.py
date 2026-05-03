@@ -46,8 +46,6 @@ if uploaded_file is not None:
             st.session_state["history"] = []
         st.success(f"PDF indexed. {len(chunks)} chunks ready.")
 
-    # show chat history
-    # show chat history
     for chat in st.session_state.get("history", []):
         st.write(f"**You:** {chat['question']}")
         st.write(f"**Answer:** {chat['answer']}")
