@@ -119,7 +119,7 @@ Answer:
 
         
         if sources:
-            answer += f"\n\n📌 Sources: Pages {', '.join(map(str, sorted(sources)))}"
+            answer += f"\n\n Sources: Pages {', '.join(map(str, sorted(sources)))}"
 
         st.session_state["history"].append({
             "question": question,
