@@ -13,6 +13,7 @@ load_dotenv()
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
+# ✅ Improved chunking with overlap
 def split_into_chunks(text, chunk_size=500, overlap=100):
     chunks = []
     for i in range(0, len(text), chunk_size - overlap):
@@ -61,12 +62,14 @@ if uploaded_file is not None:
 
         st.success(f"PDF indexed. {len(chunks)} chunks ready.")
 
+    # ✅ Chat UI
     for chat in st.session_state.get("history", []):
         with st.chat_message("user"):
             st.write(chat["question"])
         with st.chat_message("assistant"):
             st.write(chat["answer"])
 
+    # ✅ Input box
     question = st.chat_input("Ask something about your PDF...")
 
     if question:
@@ -78,8 +81,10 @@ if uploaded_file is not None:
         index = st.session_state["index"]
         chunks = st.session_state["chunks"]
 
+        # ✅ Embed question
         question_vector = model.encode([question])
 
+        # ✅ Better retrieval (k=5)
         distances, indices = index.search(question_vector, k=5)
 
         context = ""
@@ -90,7 +95,7 @@ if uploaded_file is not None:
             context += f"(Page {chunk['page']}) {chunk['text']}\n\n"
             sources.add(chunk["page"])
 
-        
+        # ✅ Improved prompt
         prompt = f"""
 You are a precise assistant.
 
@@ -117,7 +122,7 @@ Answer:
 
         answer = response.choices[0].message.content
 
-        
+        # ✅ Append sources
         if sources:
             answer += f"\n\n📌 Sources: Pages {', '.join(map(str, sorted(sources)))}"
 
