@@ -135,12 +135,11 @@ Answer:
 st.markdown("""
 <style>
 .footer {
-    position: fixed;
-    bottom: 60px;
-    width: 100%;
     text-align: center;
     font-size: 14px;
     color: gray;
+    margin-top: 50px;
+    padding-bottom: 20px;
 }
 </style>
 
