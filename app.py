@@ -132,9 +132,20 @@ Answer:
 
         st.rerun()
        
-st.markdown("---")
-st.markdown(
-    "© 2026 Amaan Shikalgar • "
-    "[GitHub Repository](https://github.com/AmaanShikalgar/RAG-pdf-chatbot)",
-    unsafe_allow_html=True
-)
+st.markdown("""
+<style>
+.footer {
+    position: fixed;
+    bottom: 60px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+}
+</style>
+
+<div class="footer">
+© 2026 Amaan Shikalgar • 
+<a href="https://github.com/your-username/your-repo" target="_blank">GitHub</a>
+</div>
+""", unsafe_allow_html=True)
