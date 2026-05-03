@@ -14,7 +14,8 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def split_into_chunks(text, chunk_size=500, overlap=100):
     chunks = []
-    for i in range(0, len(text), chunk_size - overlap):
+    step = chunk_size - overlap
+    for i in range(0, max(1, len(text)), step):
         chunks.append(text[i:i + chunk_size])
     return chunks
 
@@ -107,19 +108,18 @@ if "uploaded_file" in st.session_state:
 You are a precise and concise assistant.
 
 Rules:
-- Answer primarily using the provided context
+- Answer ONLY using the provided context when possible
 - If the context is insufficient, you may use general knowledge
-    If the answer is not found in the context, you MUST output exactly in two separate lines:
+- If the answer is not found in the context, follow EXACTLY this format:
 
-    Line 1: I cannot find this in the document.
-    Line 2: the answer
+I cannot find this in the document.
 
-    Do not combine the lines. Do not write everything in one sentence.
+<answer here>
 
-- Keep answers short (1 or 2 sentences)
-- Do NOT add explanations about whether the answer is from context
-- Do NOT use brackets, notes, or meta commentary
-- Be natural and direct
+- Keep answers short and meaningful (1–2 sentences)
+- Do NOT merge both lines into one sentence
+- Do NOT use brackets, notes, or meta explanations
+- Do NOT mention whether the answer is from context or not
 
 Context:
 {context}
@@ -136,7 +136,14 @@ Answer:
                 messages=[{"role": "user", "content": prompt}]
             )
 
-        answer = response.choices[0].message.content
+        raw_answer = response.choices[0].message.content.strip()
+
+        if "I cannot find this in the document." in raw_answer:
+            parts = raw_answer.split("I cannot find this in the document.")
+            explanation = parts[1].strip() if len(parts) > 1 else ""
+            answer = "I cannot find this in the document.\n\n" + explanation
+        else:
+            answer = raw_answer
 
         if sources:
             answer += f"\n\nSources: Pages {', '.join(map(str, sorted(sources)))}"
