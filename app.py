@@ -134,7 +134,9 @@ Answer:
        
 st.markdown("---")
 st.markdown(
-    "© 2026 Amaan Shikalgar • "
-    "[GitHub Repository](https://github.com/AmaanShikalgar/RAG-pdf-chatbot)",
+    "<div style='text-align: center;'>"
+    "© 2026 Amaan Shikalgar<br>"
+    "<a href='https://github.com/your-username/your-repo' target='_blank'>GitHub Repository</a>"
+    "</div>",
     unsafe_allow_html=True
 )
