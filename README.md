@@ -1,65 +1,136 @@
-# RAG PDF Chatbot
+# 📄 RAG PDF Chatbot
 
-Chat with any PDF using AI. Upload a document, ask questions, and get answers based only on your document's content.
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0ea5e9,100:1e293b&height=200&section=header&text=RAG%20PDF%20Chatbot&fontSize=40&fontColor=ffffff&animation=fadeIn" />
+</p>
 
-🚀 **Live Demo**: https://rag-pdf-chatbot-amaan.streamlit.app/
-
----
-
-## How It Works
-
-1. Upload any PDF
-2. The app extracts and splits text into chunks
-3. Each chunk is converted to a vector using Sentence Transformers
-4. Vectors are stored in FAISS for fast semantic search
-5. Your question is matched against chunks using vector similarity
-6. The most relevant chunks are sent to Llama AI to generate an answer
+<p align="center">
+AI-powered Document Question Answering System using Retrieval-Augmented Generation (RAG)
+</p>
 
 ---
 
-## Tech Stack
-
-| Tool | Purpose |
-|------|---------|
-| Python | Core language |
-| Streamlit | Web interface |
-| PyPDF2 | PDF text extraction |
-| Sentence Transformers | Text embeddings |
-| FAISS | Vector database |
-| Groq + Llama 3.3 | LLM for answer generation |
+## 📸 Live Demo
+https://rag-pdf-chatbot-amaan.streamlit.app/
 
 ---
 
-## Run Locally
+## ⚡ Features
 
-1. Clone the repo
-   git clone https://github.com/AmaanShikalgar/rag-pdf-chatbot.git
-   cd rag-pdf-chatbot
-
-2. Create virtual environment
-   python -m venv venv
-   venv\Scripts\activate
-
-3. Install dependencies
-   pip install -r requirements.txt
-
-4. Create .env file
-   GROQ_API_KEY=your_key_here
-
-5. Run the app
-   streamlit run app.py
+- Chat with any PDF document  
+- Semantic search using FAISS  
+- Embedding generation via Sentence Transformers  
+- Context-aware responses using LLaMA 3 (Groq API)  
+- Page-level source tracking  
+- Chat history support  
+- Streamlit interactive UI  
 
 ---
 
-## Get a Free Groq API Key
+## 🧠 How It Works
+
+1. Upload PDF  
+2. Extract text  
+3. Split into chunks  
+4. Convert chunks into embeddings  
+5. Store embeddings in FAISS index  
+6. Convert query into embedding  
+7. Retrieve most relevant chunks  
+8. Send context to LLM  
+9. Generate grounded answer  
+
+---
+
+## 🏗️ Architecture
+
+PDF → Text Extraction → Chunking → Embeddings → FAISS Index → Retrieval → LLM (LLaMA 3) → Answer
+
+---
+
+## 🛠️ Tech Stack
+
+**Backend / AI:**
+- Python  
+- FAISS  
+- Sentence Transformers  
+- PyPDF2  
+- Groq API (LLaMA 3.3)
+
+**Frontend:**
+- Streamlit  
+
+**Concept:**
+- Retrieval-Augmented Generation (RAG)
+
+---
+
+## 📁 Project Structure
+
+rag-pdf-chatbot/  
+├── app.py  
+├── requirements.txt  
+├── .env (ignored)  
+├── README.md  
+└── screenshots/  
+&nbsp;&nbsp;&nbsp;&nbsp;└── demo.png  
+
+---
+
+## 🚀 Run Locally
+
+### Clone repository
+git clone https://github.com/your-username/rag-pdf-chatbot.git  
+cd rag-pdf-chatbot  
+
+### Create virtual environment
+python -m venv venv  
+venv\Scripts\activate  
+
+### Install dependencies
+pip install -r requirements.txt  
+
+### Add environment variables
+GROQ_API_KEY=your_api_key_here  
+
+### Run app
+streamlit run app.py  
+
+---
+
+## 🔑 API Key
 https://console.groq.com
 
 ---
 
-## What is RAG?
+## 📚 What is RAG?
 
-RAG (Retrieval-Augmented Generation) is a technique that gives LLMs access
-to your specific documents. Instead of relying on training data, the model
-retrieves relevant context from your files and answers based only on that.
+Retrieval-Augmented Generation (RAG) is a technique where:
 
-This is one of the most in-demand skills in GenAI development right now.
+- Relevant information is retrieved from documents  
+- That context is given to an LLM  
+- The model generates grounded responses  
+
+This reduces hallucination and improves factual accuracy.
+
+---
+
+## 💡 Key Learnings
+
+- Vector embeddings and semantic search  
+- FAISS-based retrieval systems  
+- LLM integration with external context  
+- Prompt engineering for grounding responses  
+- End-to-end AI system design  
+
+---
+
+## 👨‍💻 Author
+
+**Amaan Shikalgar**  
+Full Stack & AI Developer  
+
+---
+
+## ⭐ Support
+
+If you like this project, please give it a ⭐ on GitHub.
