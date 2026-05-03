@@ -24,6 +24,15 @@ def load_model():
 
 model = load_model()
 
+with st.sidebar:
+    st.subheader("About")
+    st.markdown("Chat with your PDF using semantic search and LLM-based answers.")
+    st.markdown("Upload a document and ask questions based on its content.")
+    
+    st.markdown("---")
+    st.markdown("<small>© 2026 Amaan Shikalgar</small>", unsafe_allow_html=True)
+    st.markdown("<small><a href='https://github.com/your-username/your-repo'>GitHub Repository</a></small>", unsafe_allow_html=True)
+
 st.title("Chat with your PDF")
 
 if "history" not in st.session_state:
@@ -31,7 +40,7 @@ if "history" not in st.session_state:
 
 st.divider()
 
-if st.button("Clear Chat"):
+if st.button("New Chat"):
     st.session_state["history"] = []
     st.rerun()
 
@@ -97,13 +106,15 @@ if "uploaded_file" in st.session_state:
             sources.add(chunk["page"])
 
         prompt = f"""
-You are a precise assistant.
+You are a precise and concise assistant.
 
 Rules:
-- Answer ONLY from the provided context
-- If the answer is not in the context, say: "I cannot find this in the document."
-- Keep the answer concise
-- Mention page numbers if relevant
+- Answer primarily using the provided context
+- If the context is insufficient, you may use general knowledge
+- - If the answer is not found, put "I cannot find this in the document." on a separate line, followed by the answer
+- Keep answers short but meaningful (1–2 sentences)
+- Avoid overly short or vague answers
+- Do not use brackets or meta explanations
 
 Context:
 {context}
@@ -131,20 +142,3 @@ Answer:
         })
 
         st.rerun()
-       
-st.markdown("""
-<style>
-.footer {
-    text-align: center;
-    font-size: 14px;
-    color: gray;
-    margin-top: 50px;
-    padding-bottom: 20px;
-}
-</style>
-
-<div class="footer">
-© 2026 Amaan Shikalgar • 
-<a href="https://github.com/your-username/your-repo" target="_blank">GitHub</a>
-</div>
-""", unsafe_allow_html=True)
