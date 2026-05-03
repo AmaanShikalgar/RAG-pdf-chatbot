@@ -3,7 +3,6 @@ import PyPDF2
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-import pickle
 import os
 from groq import Groq
 from dotenv import load_dotenv
@@ -25,11 +24,24 @@ def load_model():
 
 model = load_model()
 
-st.title("📄 Chat with your PDF")
+st.title("Chat with your PDF")
+
+if "history" not in st.session_state:
+    st.session_state["history"] = []
+
+st.divider()
+
+if st.button("Clear Chat"):
+    st.session_state["history"] = []
+    st.rerun()
 
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
 
 if uploaded_file is not None:
+    st.session_state["uploaded_file"] = uploaded_file
+
+if "uploaded_file" in st.session_state:
+    uploaded_file = st.session_state["uploaded_file"]
 
     if "chunks" not in st.session_state:
         with st.spinner("Reading and indexing your PDF..."):
@@ -37,7 +49,6 @@ if uploaded_file is not None:
 
             chunks = []
 
-            # ✅ Add page-wise metadata
             for i, page in enumerate(reader.pages):
                 text = page.extract_text()
                 if text:
@@ -70,11 +81,6 @@ if uploaded_file is not None:
     question = st.chat_input("Ask something about your PDF...")
 
     if question:
-
-        if question.lower() == "exit":
-            st.session_state["history"] = []
-            st.rerun()
-
         index = st.session_state["index"]
         chunks = st.session_state["chunks"]
 
@@ -90,7 +96,6 @@ if uploaded_file is not None:
             context += f"(Page {chunk['page']}) {chunk['text']}\n\n"
             sources.add(chunk["page"])
 
-        
         prompt = f"""
 You are a precise assistant.
 
@@ -117,9 +122,8 @@ Answer:
 
         answer = response.choices[0].message.content
 
-        
         if sources:
-            answer += f"\n\n Sources: Pages {', '.join(map(str, sorted(sources)))}"
+            answer += f"\n\nSources: Pages {', '.join(map(str, sorted(sources)))}"
 
         st.session_state["history"].append({
             "question": question,
