@@ -131,3 +131,10 @@ Answer:
         })
 
         st.rerun()
+       
+st.markdown("---")
+st.markdown(
+    "© 2026 Amaan Shikalgar • "
+    "[GitHub Repository](https://github.com/AmaanShikalgar/RAG-pdf-chatbot)",
+    unsafe_allow_html=True
+)
