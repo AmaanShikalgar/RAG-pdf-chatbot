@@ -2,7 +2,6 @@ import streamlit as st
 import PyPDF2
 from sentence_transformers import SentenceTransformer
 import faiss
-import numpy as np
 import os
 from groq import Groq
 from dotenv import load_dotenv
