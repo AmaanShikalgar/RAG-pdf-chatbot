@@ -28,7 +28,6 @@ with st.sidebar:
     st.subheader("About")
     st.markdown("Chat with your PDF using semantic search and LLM-based answers.")
     st.markdown("Upload a document and ask questions based on its content.")
-    
     st.markdown("---")
     st.markdown("<small>© 2026 Amaan Shikalgar</small>", unsafe_allow_html=True)
     st.markdown("<small><a href='https://github.com/your-username/your-repo'>GitHub Repository</a></small>", unsafe_allow_html=True)
@@ -94,7 +93,6 @@ if "uploaded_file" in st.session_state:
         chunks = st.session_state["chunks"]
 
         question_vector = model.encode([question])
-
         distances, indices = index.search(question_vector, k=5)
 
         context = ""
@@ -111,11 +109,16 @@ You are a precise and concise assistant.
 Rules:
 - Answer primarily using the provided context
 - If the context is insufficient, you may use general knowledge
-- If the answer is not found in the context, start with: "I cannot find this in the document." and then provide a brief but informative answer
-- Keep answers short, clear, and natural (1–2 sentences)
-- Do not use brackets or meta explanations
-- Do not say "based on general knowledge" or similar phrases
-- Avoid mentioning unrelated topics
+- If the answer is not found in the context, ALWAYS follow this format:
+
+I cannot find this in the document.
+
+<answer here>
+
+- Keep answers short (1–2 sentences)
+- Do NOT add explanations about whether the answer is from context
+- Do NOT use brackets, notes, or meta commentary
+- Be natural and direct
 
 Context:
 {context}
