@@ -1,7 +1,7 @@
-# 📄 RAG PDF Chatbot
+# 📄 DocuMind AI
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0ea5e9,100:1e293b&height=200&section=header&text=RAG%20PDF%20Chatbot&fontSize=40&fontColor=ffffff&animation=fadeIn" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0ea5e9,100:1e293b&height=200&section=header&text=DocuMind%20AI&fontSize=40&fontColor=ffffff&animation=fadeIn" />
 </p>
 
 <p align="center">
@@ -66,7 +66,7 @@ PDF → Text Extraction → Chunking → Embeddings → FAISS Index → Retrieva
 
 ## 📁 Project Structure
 
-rag-pdf-chatbot/  
+DocuMind-AI/  
 ├── app.py  
 ├── requirements.txt  
 ├── .env (ignored)  
@@ -79,8 +79,8 @@ rag-pdf-chatbot/
 ## 🚀 Run Locally
 
 ### Clone repository
-git clone https://github.com/your-username/rag-pdf-chatbot.git  
-cd rag-pdf-chatbot  
+git clone https://github.com/your-username/DocuMind-AI.git  
+cd DocuMind-AI  
 
 ### Create virtual environment
 python -m venv venv  
